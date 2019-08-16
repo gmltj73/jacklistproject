@@ -1,0 +1,58 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<form method="POST" class="form-daily">
+    <h1>Jacklist</h1>
+    <p>Welcome!</p>
+
+    <h2>Project</h2>
+	<table class="table">
+     <thead class="thead-dark">
+        <th>name</th>
+        <th>summary</th>
+        <th>description</th>
+        <th>period</th>
+        <th>member</th>
+     </thead>
+     <tbody>
+         {% for data in project %}
+               <tr>
+                   <td> {{ data.name }}</td>
+                   <td> {{ data.summary }}</td>
+                   <td> {{ data.description }}</td>
+                   <td> {{ data.update_time|timesince:data.reg_date }}</td>
+                   <td>
+                       {% for member in project_member %}
+                            {% if member.project_idx.field_idx|stringformat:"s" == data.field_idx|stringformat:"s" %}
+                                {{ member.member_idx.username}},
+                            {% endif %}
+                       {% endfor %}
+                   </td>
+               </tr>
+         {% endfor %}
+     </tbody>
+    </table>
+
+    <br><br>
+    <table width="400">
+        <td>
+        <h2>Daily</h2>
+            <table class="table">
+             <thead class="thead-dark">
+                 <th>daily date</th>
+                 <th>member</th>
+             </thead>
+             <tbody>
+                 {% for data in daily %}
+                       <tr>
+                           <td> {{ data.daily_date|date:"Y-m-d" }}</td>
+                           <td> {{ data.member_idx.username }}</td>
+                       </tr>
+                 {% endfor %}
+             </tbody>
+            </table>
+        </td>
+    </table>
+</form>
+
+{% endblock %}
+

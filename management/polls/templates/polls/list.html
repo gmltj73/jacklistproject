@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<table>
+     <thead>
+         <th>
+             daily date
+         </th>
+         <th>comment</th>
+         <th>love</th>
+     </thead>
+     <tbody>
+         {% for data in datas %}
+           <tr>
+                <td>{{ data.daily_date }}</td>
+            <td>{{ data.comment }}</td>
+            <td> {{ data.love }}</td>
+           </tr>
+         {% endfor %}
+     </tbody>
+    </table>
+
+{% endblock %}

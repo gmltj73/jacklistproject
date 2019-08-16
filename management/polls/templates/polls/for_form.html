@@ -1,0 +1,60 @@
+{% extends 'base_generic.html' %}
+{% load staticfiles %}
+
+{% block content %}
+	<form method="POST" class="form-daily">
+        <h1>DailyReport</h1><br>
+		{% csrf_token %}
+        <div class="div-daily">{{ form.daily_date.label_tag }} {{ form.daily_date}}</div><br>
+
+		    <table class="table form-table table-bordered table-sm" style="width: 700px">
+                <thead class="text-center">
+                    <tr>
+                        <th>Project idx</th>
+                        <th>Contents</th>
+                        <th>Remarks</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for form_data in formset %}
+                    <tr class="item">
+                        <td>
+                            {{ form_data.project_idx }}
+                        </td>
+                        <td>
+                            {{ form_data.contents }}
+                        </td>
+                        <td>
+                            {{ form_data.remarks }}
+                        </td>
+                        <td align="center" style="padding-top: .55rem;">
+                            <button type="button" class="btn btn-danger btn-sm remove-form-row"
+                                    id="{{ formset.prefix }}">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    <tr>
+                        <td colspan="9"
+                            style="border-left: none!important; border-right: none !important; border-bottom: none!important;">
+                            <button type="button" class="btn btn-sm btn-success add-form-row"
+                                    id="{{ formset.prefix }}">
+                                Add
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ formset.management_form }}
+        <div class="div-daily">{{ form.comment.label_tag }} {{ form.comment}}</div><br>
+        <div class="div-daily">{{ form.love.label_tag }} {{ form.love}}</div><br>
+		<button class="btn btn-outline-primary" name="save" type="submit"><i class="fa fa-plus icon"></i>Save</button>
+	</form>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript" src="{% static 'js/formset.js' %}"></script>
+{% endblock%}

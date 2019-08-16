@@ -1,0 +1,12 @@
+<div>
+    <form method="POST">
+        {% csrf_token %}
+
+        <table>
+        {{ form.as_table }}
+        </table>
+
+        <button type="submit">Save</button>
+        <button type="reset">Cancle</button>
+    </form>
+</div>

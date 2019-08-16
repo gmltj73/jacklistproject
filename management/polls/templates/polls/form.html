@@ -1,0 +1,14 @@
+{% extends 'base_generic.html' %}
+{% block content %}
+<form method="POST" class="form-daily">
+    <h1>Project</h1><br>
+    {% csrf_token %}
+    <div class="div-project">
+        <table>
+        {{ form.as_table }}
+        </table>
+    </div>
+    <button class="btn btn-outline-primary" name="save" type="submit"><i class="fa fa-plus icon"></i>Save</button>
+    <button class="btn btn-outline-secondary" name="cancel" type="reset"><i class="fa fa-eraser icon"></i>Cancle</button>
+</form>
+{% endblock %}
